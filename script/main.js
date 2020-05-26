@@ -1,3 +1,5 @@
+'use strict';
+
 const leftMenu = document.querySelector('.left-menu'), 
     hamburger = document.querySelector('.hamburger'),
     tvShowsList = document.querySelector('.tv-shows__list'),
@@ -53,21 +55,21 @@ const createCards = (data) => {
         name, 
         overview, 
         original_name, 
-        poster_path, 
-        backdrop_path, 
-        vote_average 
+        poster_path: posterPath, 
+        backdrop_path: backdropPath, 
+        vote_average: voteAverage 
     } = data;
 
     const imageURL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
 
-    const poster = poster_path ? `
-    ${imageURL}${poster_path}` : 'img/no-poster.jpg';
+    const poster = posterPath ? `
+    ${imageURL}${posterPath}` : 'img/no-poster.jpg';
 
-    const backdrop = backdrop_path ? `
-    ${imageURL}${backdrop_path}` : 'img/no-poster.jpg';
-    
-    const vote = vote_average > 1 ? `
-    <span class="tv-card__vote">${vote_average}</span>` : '';
+    const backdrop = backdropPath ? `
+    ${imageURL}${backdropPath}` : 'img/no-poster.jpg';
+
+    const vote = voteAverage > 1 ? `
+    <span class="tv-card__vote">${voteAverage}</span>` : '';
 
     const card = document.createElement('li');
     card.classList.add('tv-shows__item');
@@ -85,6 +87,8 @@ const createCards = (data) => {
     `);
 
     tvShowsList.insertAdjacentElement('beforeend', card);
+
+    let tmp;
 
     card.addEventListener('mouseover', e => {
         const cardImage = e.target.closest('.tv-card__img');
